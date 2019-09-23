@@ -61,6 +61,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def confirm
+    @user = User.new(user_params)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
