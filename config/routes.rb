@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
-  resources :users do
+
+
+
+  resources :users, exept: :index do
     collection do
       post :confirm
     end
   end
+
 end

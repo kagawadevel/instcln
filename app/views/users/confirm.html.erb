@@ -1,10 +1,10 @@
 <h1>この内容で送信しますか？</h1>
 
-<%= form_with(model: @user, url: users_path, local: true) do |f| %>
-  <%= f.hidden_field :name %>
-  <%= f.hidden_field :email %>
-  <%= f.hidden_field :password %>
-  <%= f.hidden_field :password_confirmation %>
+<%= form_with(model: @user, url: users_path, local: true) do |form| %>
+  <%= form.hidden_field :name %>
+  <%= form.hidden_field :email %>
+  <%= form.hidden_field :password %>
+  <%= form.hidden_field :password_confirmation %>
 
   <div>
     <div><strong>ユーザー名</strong></div>
@@ -17,18 +17,18 @@
   </div>
 
   <div>
-    <%= f.submit :登録する %>
+    <%= form.submit '登録する' %>
   </div>
 
 <% end %>
 
-<%= form_with(model: @user, url: new_user_path, local: true, method: :get) do |f| %>
+<%= form_with(model: @user, url: new_user_path, local: true, method: :get) do |form| %>
 
-  <%= f.hidden_field :name %>
-  <%= f.hidden_field :email %>
+  <%= form.hidden_field :name %>
+  <%= form.hidden_field :email %>
 
   <div>
-    <%= f.submit '戻る', name: 'back' %>
+    <%= form.submit '戻る', name: 'back' %>
   </div>
 
 <% end %>
