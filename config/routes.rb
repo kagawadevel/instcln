@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
 
 
-  resources :users, exept: :index do
+  resources :users, except: :index do
     collection do
       post :confirm
     end
