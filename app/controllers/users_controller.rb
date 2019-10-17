@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-
   # GET /users
   # GET /users.json
 
@@ -12,9 +11,9 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     if params[:back]
-    @user = User.new(user_params)
+     @user = User.new(user_params)
     else
-    @uesr = User.new
+     @user = User.new
     end
   end
 
@@ -26,13 +25,16 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-    if params[:back]
-      render :new
-    else
+
+    respond_to do |format|
       if @user.save
-        redirect_to users_path, notice: "アカウントを作成しました！"
+        session[:user_id] = @user.id
+        format.html{ redirect_to @user, flash: {success: 'アカウント作成しました'}}
+        format.json{render :show, status: :created, location: @user }
       else
-        render 'new'
+        flash.now[:warning] = 'アカウント作成に失敗しました'
+        format.html{ render :new }
+        format.json{ render json:@user.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -54,6 +56,7 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
+    session.delete(@user.id)
     @user.destroy
     respond_to do |format|
       format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
@@ -63,7 +66,11 @@ class UsersController < ApplicationController
 
   def confirm
     @user = User.new(user_params)
-    render :new if @blog.invalid?
+
+    if @user.invalid?
+      flash.now[:warning] = 'アカウント作成できませんでした'
+      render :new
+    end
   end
 
   private

@@ -1,10 +1,10 @@
 <%= form_with(model: user, local: true, url: user_new_or_edit) do |form| %>
-  <% if @user.errors.any? %>
+  <% if user.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
 
       <ul>
-      <% @user.errors.full_messages.each do |message| %>
+      <% user.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -17,17 +17,17 @@
   </div>
 
   <div class="field">
-    <div><strong>ユーザ名</strong></div>
+    <div><strong>メールアドレス</strong></div>
     <%= form.email_field :email %>
   </div>
 
   <div class="field">
-    <div><strong>ユーザ名</strong></div>
+    <div><strong>パスワード</strong></div>
     <%= form.password_field :password %>
   </div>
 
   <div class="field">
-    <div><strong>ユーザ名</strong></div>
+    <div><strong>パスワード確認</strong></div>
     <%= form.password_field :password_confirmation %>
   </div>
 
