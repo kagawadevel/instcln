@@ -15,7 +15,7 @@ module SessionsHelper
     end
   end
 
-  def currnt_user_name
+  def current_user_name
     current_user.name if logged_in?
   end
 

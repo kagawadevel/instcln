@@ -18,7 +18,11 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
-    @post = Post.new
+    if params[:back]
+      @post = Post.new(post_params)
+    else
+      @post = Post.new
+    end
   end
 
   # GET /posts/1/edit
@@ -73,7 +77,7 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:content, :image, :user_id)
+      params.require(:post).permit(:content, :image, :image_cache)
     end
 
     def require_current_user
