@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-
+  before_action :require_logged_in, only: [:new, :confirm, :create, :edit, :update, :destroy]
+  before_action :require_current_user, only: [:edit, :update, :destroy]
   # GET /posts
   # GET /posts.json
   def index
@@ -10,6 +11,9 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
+    if logged_in?
+      @favorite = current_user.favorites.find_by(post_id: @post_id)
+    end
   end
 
   # GET /posts/new
@@ -70,5 +74,9 @@ class PostsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
       params.require(:post).permit(:content, :image, :user_id)
+    end
+
+    def require_current_user
+      redirect_to new_session_path, flash: { warning: 'ユーザー権限がありません' }
     end
 end
