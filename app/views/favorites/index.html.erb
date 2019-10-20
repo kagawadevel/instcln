@@ -1,6 +1,6 @@
 <h1>お気に入り投稿</h1>
 
-<% favorites.each do |favorite| %>
+<% @favorites.each do |favorite| %>
   <div><%= image_tag(favorite.image.url) if favorite.image.url %></div>
   <div><%= favorite.content %></div>
 

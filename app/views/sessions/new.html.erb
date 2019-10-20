@@ -1,6 +1,6 @@
-<h1>ログインぺ</h1>
+<h1>ログインページ</h1>
 
-<%= form_with( scope: session, url: sessions_path, local: true) do |f| %>
+<%= form_with( scope: :session, url: sessions_path, local: true) do |f| %>
 
   <div class="">
     <div class=""><strong>メールアドレス</strong></div>
@@ -15,3 +15,4 @@
   <div class="">
     <div class=""><%= f.submit 'ログイン' %></div>
   </div>
+<% end %>
