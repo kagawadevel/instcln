@@ -1,17 +1,17 @@
 <h1>この内容で送信しますか？</h1>
 
   <%= form_with(model: @post, url: posts_path, local: true) do |form| %>
-    <%= hidden_field_tag :"cache[image]", @post.image_cache %>
     <%= form.hidden_field :content %>
-
-    <div>
-      <div>写真</div>
-      <div><%= image_tag(@post.image.url) if @post.image.url %></div>
-    </div>
+    <%= form.hidden_field :image_cache %>
 
     <div>
       <div>コンテンツ</div>
       <div><%= @post.content %></div>
+    </div>
+
+    <div>
+      <div>写真</div>
+      <div><%= image_tag(@post.image.url) if @post.image.url %></div>
     </div>
 
     <div>
@@ -22,8 +22,8 @@
 
   <%= form_with(model: @post, url: new_post_path, local: true, method: :get) do |form| %>
 
-    <%= hidden_field_tag :"cache[image]", @post.image_cache %>
     <%= form.hidden_field :content %>
+    <%= form.hidden_field :image_cache %>
 
     <div>
       <%= form.submit '戻る', name: 'back' %>

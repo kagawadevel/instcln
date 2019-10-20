@@ -69,6 +69,16 @@ class PostsController < ApplicationController
     end
   end
 
+  def confirm
+    @post = Post.new(post_params)
+    @post.user_id = current_user.id
+
+    if @post.invalid?
+      flash.now[:warning] = '投稿に失敗しました'
+      render :new
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
