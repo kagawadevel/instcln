@@ -1,31 +1,22 @@
-<p id="notice"><%= notice %></p>
 
-<h1>Posts</h1>
+<h1 class="bottom50">投稿一覧</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Content</th>
-      <th>Image</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="conteiner">
+<% @posts.each do |post| %>
+  <div class="row">
+    <%= image_tag(post.image.url, class: "img-responsive") if post.image.url %>
+  </div>
+  <div class="row"><%= post.content %></div>
+  <div class="row">
+    <strong>投稿者</strong>：<%= post.user.name %>
+  </div>
 
-  <tbody>
-    <% @posts.each do |post| %>
-      <tr>
-        <td><%= post.content %></td>
-        <td><%= post.image %></td>
-        <td><%= post.user %></td>
-        <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+  <div class="row">
+    <%= link_to '確認', post, class: "btn btn-default" %>
+    <% if logged_in? && post.user_id == current_user.id %>
+      <%= link_to '編集', edit_post_path(post.id), class: "btn btn-info" %>
+      <%= link_to '削除', post, class: "btn btn-danger", method: :delete, data: { confirm: '削除してもいいですか？' } %>
     <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Post', new_post_path %>
+  </div>
+</div>
+<% end %>

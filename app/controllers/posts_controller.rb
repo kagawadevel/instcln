@@ -33,6 +33,8 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(post_params)
+    @post.user_id = current_user.id
+    @post.save!
 
     respond_to do |format|
       if @post.save
@@ -91,6 +93,6 @@ class PostsController < ApplicationController
     end
 
     def require_current_user
-      redirect_to new_session_path, flash: { warning: 'ユーザー権限がありません' }
+      redirect_to new_session_path, flash: { warning: 'ユーザが違います' } unless logged_in? && (@post.user_id == current_user.id)
     end
 end
