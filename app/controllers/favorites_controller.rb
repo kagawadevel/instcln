@@ -7,11 +7,11 @@ class FavoritesController < ApplicationController
 
   def create
     favorite = current_user.favorites.create(post_id: params[:post_id])
-    redirect_to post_path(params[:post_id]), flash: { success: "#{favorite.post.user.name}さんの投稿をお気に入りしました"}
+    redirect_to posts_path, flash: { success: "#{favorite.post.user.name}さんの投稿をお気に入りしました"}
   end
 
   def destroy
     favorite = current_user.favorites.find(params[:favorite_id]).destroy
-    redirect_to post_path(params[:post_id]), flash: { success: "#{favorite.post.user.name}さんのお気に入りを解除しました"}
+    redirect_to posts_path, flash: { success: "#{favorite.post.user.name}さんのお気に入りを解除しました"}
   end
 end

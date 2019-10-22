@@ -1,22 +1,21 @@
-
 <h1 class="bottom50">投稿一覧</h1>
 
-<div class="conteiner">
 <% @posts.each do |post| %>
-  <div class="row">
+  <div><%= post.content %></div>
+  <div>
     <%= image_tag(post.image.url, class: "img-responsive") if post.image.url %>
   </div>
-  <div class="row"><%= post.content %></div>
-  <div class="row">
+  <div>
     <strong>投稿者</strong>：<%= post.user.name %>
   </div>
 
-  <div class="row">
-    <%= link_to '確認', post, class: "btn btn-default" %>
+  <div>
+    <%= link_to '確認', post_path(post.id), class: "btn btn-default" %>
+
     <% if logged_in? && post.user_id == current_user.id %>
       <%= link_to '編集', edit_post_path(post.id), class: "btn btn-info" %>
       <%= link_to '削除', post, class: "btn btn-danger", method: :delete, data: { confirm: '削除してもいいですか？' } %>
     <% end %>
   </div>
-</div>
+
 <% end %>

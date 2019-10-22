@@ -1,8 +1,11 @@
-<h1>お気に入り投稿</h1>
+
+<h1 class="bottom50">お気に入り一覧</h1>
 
 <% @favorites.each do |favorite| %>
-  <div><%= image_tag(favorite.image.url) if favorite.image.url %></div>
-  <div><%= favorite.content %></div>
+<div class="top15"><%= image_tag(favorite.image.url, class: "img-responsive") if favorite.image.url %></div>
+<div class="top15"><%= favorite.content %></div>
 
-  <div><%= link_to '確認する', post_path(favorite.id) %></div>
+<div class="top15 bottom50">
+  <%= link_to '確認', post_path(favorite.id), class: "btn btn-default" %>
+</div>
 <% end %>

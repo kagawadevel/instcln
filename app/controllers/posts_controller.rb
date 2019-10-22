@@ -12,7 +12,7 @@ class PostsController < ApplicationController
   # GET /posts/1.json
   def show
     if logged_in?
-      @favorite = current_user.favorites.find_by(post_id: @post_id)
+      @favorite = current_user.favorites.find_by(post_id: @post.id)
     end
   end
 
@@ -93,6 +93,6 @@ class PostsController < ApplicationController
     end
 
     def require_current_user
-      redirect_to new_session_path, flash: { warning: 'ユーザが違います' } unless logged_in? && (@post.user_id == current_user.id)
+      redirect_to new_session_path, flash: { warning: 'ユーザー権限がありません' } unless logged_in? && (@post.user_id == current_user.id)
     end
 end
