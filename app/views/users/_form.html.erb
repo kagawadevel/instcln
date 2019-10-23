@@ -31,6 +31,13 @@
     <%= form.password_field :password_confirmation %>
   </div>
 
+  <div>
+    <div><strong>プロフィール画像</strong></div>
+    <%= form.hidden_field :image_cache %>
+    <%= image_tag(user.image.url) if user.image.url %>
+    <%= form.file_field :image %>
+  </div>
+
   <div class="actions">
     <%= form.submit '送信する'%>
   </div>

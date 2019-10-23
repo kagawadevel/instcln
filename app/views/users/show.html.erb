@@ -1,14 +1,21 @@
 <h1>ユーザー情報</h1>
 
 <p>
-  <strong>ユーザー名</strong>
+  <strong>ユーザー名:</strong>
   <%= @user.name %>
 </p>
 
 <p>
-  <strong>メールアドレス</strong>
+  <strong>メールアドレス:</strong>
   <%= @user.email %>
 </p>
+
+
+  <p>
+    <strong>プロフィール画像:</strong>
+    <%= image_tag(@user.image.url) if @user.image.url %>
+  </p>
+
 
 
 

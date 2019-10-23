@@ -5,6 +5,7 @@
   <%= form.hidden_field :email %>
   <%= form.hidden_field :password %>
   <%= form.hidden_field :password_confirmation %>
+  <%= form.hidden_field :image_cache %>
 
   <div>
     <div><strong>ユーザー名</strong></div>
@@ -17,6 +18,11 @@
   </div>
 
   <div>
+    <div><strong>プロフィール画像</strong></div>
+    <div><%= image_tag(@user.image.url) if @user.image.url %></div>
+  </div>
+
+  <div>
     <%= form.submit '登録する' %>
   </div>
 
@@ -26,6 +32,7 @@
 
   <%= form.hidden_field :name %>
   <%= form.hidden_field :email %>
+  <%= form.hidden_field :image_cache %>
 
   <div>
     <%= form.submit '戻る', name: 'back' %>
