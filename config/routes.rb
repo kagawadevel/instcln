@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  root to: 'posts#index'
+
   resources :favorites, only: [:index, :create, :destroy]
 
   resources :sessions, only: [:new, :create, :destroy]
