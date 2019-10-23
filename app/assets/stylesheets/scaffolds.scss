@@ -8,11 +8,19 @@ body {
   margin-bottom: 60px;
 }
 
+header {
+  background-color: #f4ab33;
+}
+
+nav ul li {
+  margin-left: 35px;
+}
+
 .footer {
   position: absolute;
   bottom: 0;
   width: 100%;
   height: 60px;
   color: #ddd;
-  background-color: #111;
+  background-color: #f4ab33;
 }
