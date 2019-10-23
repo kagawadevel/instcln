@@ -1,22 +1,28 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Content:</strong>
+  <strong>投稿者：</strong>
+  <%= @post.user.name %>
+</p>
+
+<p>
+  <strong>コンテンツ:</strong>
   <%= @post.content %>
 </p>
 
 <p>
-  <strong>Image:</strong>
-  <%= @post.image %>
+  <strong>画像:</strong>
+  <%= image_tag(@post.image.url) if @post.image.url %>
 </p>
 
   <% if logged_in? && @post.user_id != current_user.id %>
     <% if @favorite.present? %>
       <%= link_to 'お気に入り解除', favorite_path(post_id: @post.id, favorite_id: @favorite.id), class: "btn btn-danger", method: :delete %>
     <% else %>
-      <%= link_to 'お気に入り', favorites_path(post_id: @post.id), class: "btn btn-primary", method: :post %>
+      <%= link_to 'お気に入り登録', favorites_path(post_id: @post.id), class: "btn btn-primary", method: :post %>
     <% end %>
   <% end %>
-
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
+<% if logged_in? && @post.user.id == current_user.id %>
+  <%= link_to '編集', edit_post_path(@post) %> |
+  <%= link_to '戻る', posts_path %>
+<% end %>
