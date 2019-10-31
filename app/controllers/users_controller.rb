@@ -1,8 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  # GET /users
-  # GET /users.json
-
+  before_action :require_logged_in, only: [:show, :edit, :update, :destroy]
+  before_action :require_current_user, only: [:show, :edit, :update, :destroy]
   # GET /users/1
   # GET /users/1.json
   def show
@@ -59,7 +58,7 @@ class UsersController < ApplicationController
     session.delete(@user.id)
     @user.destroy
     respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
+      format.html { redirect_to new_user_path, flash: { success: 'ユーザーを削除しました' } }
       format.json { head :no_content }
     end
   end
@@ -82,5 +81,9 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation, :image, :image_cache)
+    end
+
+    def require_current_user
+      redirect_to new_session_path, flash: { warning: 'ユーザーが違います' } unless logged_in? && (current_user.id == @user.id)
     end
 end
